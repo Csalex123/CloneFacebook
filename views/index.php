@@ -1,9 +1,18 @@
 <?php 
+if(!isset($_SESSION)) { 
+	session_start(); 
+} 
+
+if (isset($_SESSION['id_usuario'])){
+	header("location: ../views/home.php");
+} 
 
 $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
 $sucesso = isset($_GET['sucesso']) ? $_GET['sucesso'] : 0;
+$erroLogin = isset($_GET['fallha_login']) ? $_GET['fallha_login'] : 0;
 
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -46,15 +55,13 @@ $sucesso = isset($_GET['sucesso']) ? $_GET['sucesso'] : 0;
 			<a href="#!" class="brand-logo fontePadrao">&nbsp;&nbsp;&nbsp;&nbsp;Rede Alex</a>
 			<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down blue">
-				<form action="model/validar_acesso.php" method="post">
-					<li>&nbsp;&nbsp;</li>
-					<li><input placeholder="E-mail" name="email" type="email" style="margin-right:  50px; background: white; height: 33px;"></li>
-					<li>&nbsp;&nbsp;</li>
-					<li><input placeholder="Senha" name="senha" type="password"  style="background: white; height: 33px;"></li>
-					<li>&nbsp;&nbsp;</li>
-					<li><button id="btn_enviar" class="waves-effect waves-light  green btn " >Entrar </button></li>
-					<li>&nbsp;&nbsp;</li>
-				</form>
+				<li>&nbsp;&nbsp;</li>
+				<li><input placeholder="E-mail" type="email" style="margin-right:  50px; background: white; height: 33px;"></li>
+				<li>&nbsp;&nbsp;</li>
+				<li><input placeholder="Senha" type="password"  style="background: white; height: 33px;"></li>
+				<li>&nbsp;&nbsp;</li>
+				<li><button id="btn_enviar" class="waves-effect waves-light  green btn " >Entrar </button></li>
+				<li>&nbsp;&nbsp;</li>
 			</ul>
 		</div>
 
@@ -79,7 +86,7 @@ $sucesso = isset($_GET['sucesso']) ? $_GET['sucesso'] : 0;
 				<div class="col s12">
 					<div class="card-panel hoverable">
 						<center>
-							<img class="responsive-img " src="views/img/planodefundo4.png" >
+							<img class="responsive-img " src="img/planodefundo4.png" >
 						</center>
 						<h5> Conectando você com o Mundo! </h5>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi consequat gravida augue vel faucibus. Vivamus at mollis dolor. Donec molestie leo vitae massa consectetur mattis. Morbi facilisis laoreet sem, eu eleifend est mattis a. Fusce ac pretium lacus. Praesent placerat ut libero a varius. Etiam posuere mollis faucibus. Suspendisse cursus consequat mauris in dapibus. Proin vitae tellus non est rutrum finibus.</p>
@@ -98,6 +105,11 @@ $sucesso = isset($_GET['sucesso']) ? $_GET['sucesso'] : 0;
 			<div class="card-panel ">
 				<?php  if ($erro == 1 ) {
 					echo '<p style="color: red; font-size: 1.2em;" ><i class="material-icons left">clear</i>Já existe uma pessoa cadastrada com este E-mail</p>';
+				}
+
+
+				if ($erroLogin == 1 ) {
+					echo '<p style="color: red; font-size: 1.2em;" ><i class="material-icons left">clear</i>E-mail ou senha errado</p>';
 				}
 
 				if ($sucesso == 1) {
@@ -170,7 +182,7 @@ $sucesso = isset($_GET['sucesso']) ? $_GET['sucesso'] : 0;
 </div>
 
 
-<?php include('views/rodape.php')?>
+<?php include('rodape.php')?>
 
 <!--JavaScript at end of body for optimized loading-->
 <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
