@@ -19,7 +19,7 @@ $sucesso = isset($_GET['sucesso']) ? $_GET['sucesso'] : 0;
 	
 
 	<!--Import materialize.css-->
-	<link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="views/materialize/css/materialize.min.css"  media="screen,projection"/>
 
 	
 
@@ -173,6 +173,6 @@ $sucesso = isset($_GET['sucesso']) ? $_GET['sucesso'] : 0;
 <?php include('views/rodape.php')?>
 
 <!--JavaScript at end of body for optimized loading-->
-<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="views/materialize/js/materialize.min.js"></script>
 </body>
 </html>

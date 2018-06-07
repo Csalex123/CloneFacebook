@@ -22,8 +22,8 @@ if ($query) {
 
 	while($post = mysqli_fetch_assoc($query)){
 		
-		echo '<h5>'.$post['nome'].' - <small> '.$post['data_inclusao'].'</small></h5>';
-		echo "<br>";
+		echo '<h5 style="font-size: 22px;">'.$post['nome'].' - <small style="font-size: 11px;"> '.$post['data_inclusao'].'</small></h5>';
+		
 		echo '<p>'.$post['conteudo'].'</p>';
 		echo "<br> <br>";
 	}

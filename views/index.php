@@ -25,7 +25,6 @@ $erroLogin = isset($_GET['fallha_login']) ? $_GET['fallha_login'] : 0;
 	<!--Import Google Icon Font-->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-	
 
 	<!--Import materialize.css-->
 	<link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>

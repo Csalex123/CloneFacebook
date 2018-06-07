@@ -23,6 +23,7 @@ if (!isset($_SESSION['id_usuario'])) header("location: ../index.php?erro_falha=1
 	<link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
 
 	
+
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -37,6 +38,19 @@ if (!isset($_SESSION['id_usuario'])) header("location: ../index.php?erro_falha=1
 
 			$('input#input_text, textarea#textarea2').characterCounter();
 
+			function atualizarAmigos(){
+				//carregar os amigos
+				$.ajax({
+					url: '../model/recuperar_amigos.php',
+					method: 'post',
+					success: function(data){
+						$("#todos_meus_amigos").html(data);
+					}
+				});
+			}	
+
+			atualizarAmigos();
+
 			$("#btn_post").click( function(){	
 				var valor_input = $("#txt_post").val();
 
@@ -50,7 +64,8 @@ if (!isset($_SESSION['id_usuario'])) header("location: ../index.php?erro_falha=1
 
 						success: function (data){
 							$('#txt_post').val('');
-							atualizarPosts();
+							atualizarPosts(); 
+							atualizarAmigos();
 						}
 				 	}); // Fechamento do Ajaax */ 
 				}  
@@ -59,23 +74,36 @@ if (!isset($_SESSION['id_usuario'])) header("location: ../index.php?erro_falha=1
 			
 
 			function atualizarPosts(){
-				//carregar os tweets
+				//carregar os posts
 				$.ajax({
-					url: 'recuperar_post.php',
+					url: '../model/recuperar_post.php',
 					method: 'post',
 					success: function(data){
 						$("#posts").html(data);
 					}
 				});
+			}
+
+			function atualizarAmigos(){
+				//carregar os amigos
+				$.ajax({
+					url: '../model/recuperar_amigos.php',
+					method: 'post',
+					success: function(data){
+						$("#todos_meus_amigos").html(data);
+					}
+				});
 			}	
 
+			atualizarAmigos();
 			atualizarPosts();
 
-	});
+		});
 
 
 
-</script>
+	</script>
+
 </head>
 <body>
 	<?php include('menu.php')?>
@@ -133,8 +161,13 @@ if (!isset($_SESSION['id_usuario'])) header("location: ../index.php?erro_falha=1
 			<!-- Conteiner do lado direito -->
 			<div class="col s3 ">
 				<div class="card-panel">
-					<h5> Todos os seus amigos </h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi consequat gravida augue vel faucibus. Vivamus at mollis dolor. Donec molestie leo vitae massa consectetur mattis. Morbi facilisis laoreet sem, eu eleifend est mattis a. Fusce ac pretium lacus. Praesent placerat ut libero a varius. Etiam posuere mollis faucibus. Suspendisse cursus consequat mauris in dapibus. Proin vitae tellus non est rutrum finibus.</p>
+					<h5><a href="procuraramigos.php"><i class="left material-icons">search</i> Procurar amigos </a></h5>
+				</div>
+				<div class="card-panel">
+					<p style="font-size: 20px;" class="center">Todos meus amigos</p><br>
+					<div id="todos_meus_amigos">
+						
+					</div>
 				</div>
 			</div>
 		</div>
